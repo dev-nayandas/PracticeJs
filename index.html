@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js Practice</title>
+
+    <style>
+      /* This style is for task  10*/
+      .highlight {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- This Button is for 04 -->
+    <button onclick="newWindow()">new window</button>
+
+    <!-- This button is for 07 -->
+    <button onclick="handleClick()">Show Alert</button> <br />
+    <!-- This button is for 14 -->
+    <button onclick="getData()">Get data</button><br>
+    <!-- This button is for 15 -->
+    <button onclick="postData()">Post Data</button><br>
+
+    <!-- This Image is for  (c) -->
+    <img
+      id="newImg"
+      style="width: 200px; height: 200px"
+      src="https://cdn.pixabay.com/photo/2014/02/27/16/10/flowers-276014_1280.jpg"
+      alt=""
+      srcset=""
+    />
+    <!-- This Div is for  08-->
+    <div style="border: 2px salmon dotted">
+      <p id="text">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit in
+        architecto quos vero, incidunt consequuntur veritatis. Sit eligendi
+        omnis beatae!
+      </p>
+      <button id="changeBtn" onclick="handleTextChange()">change text</button>
+    </div>
+
+    <!-- This Div is for  09-->
+    <div>
+      <form id="my-form" action="">
+        <label for="name">Name</label><br />
+        <input id="name" type="text" /><br />
+        <label for="email">email</label><br />
+        <input id="email" type="email" /><br />
+        <label for="password">Password</label><br />
+        <input id="password" type="password" /><br />
+        <label for="confirm-password">Confrim password</label><br />
+        <input id="confirm-password" type="password" /><br />
+        <input type="submit" />
+      </form>
+    </div>
+
+    <!-- This Div is for 10 -->
+    <div style="border: 2px seagreen dotted">
+      <p id="bgtext">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime error
+        repellat consequuntur, vel nihil similique itaque sit harum ipsa tempora
+        earum temporibus id doloribus, officiis ullam laboriosam delectus! Sequi
+        veniam accusantium, dignissimos architecto ipsum id optio perferendis
+        minima quibusdam repellendus facere cumque temporibus voluptate nostrum
+        est pariatur error iste unde.
+      </p>
+      <button id="changeColor" onclick="highlightParagraph()">
+        change Background
+      </button>
+    </div>
+
+    <!-- This Div is for  11-->
+    <div>
+      <ul id="myList"></ul>
+    </div>
+
+    <!-- This Div is for  12-->
+    <div>
+      <img
+        id="imgId"
+        src="https://cdn.pixabay.com/photo/2015/04/19/08/32/rose-729509_1280.jpg"
+        style="width: 200px; height: 200px"
+        alt=""
+        srcset=""
+      />
+      <button id="imgChange" onclick="changeImage()">change Image</button>
+    </div>
+
+    <script>
+      // Assignment 03 Task 01
+      function getDay(dateObj) {
+        const date = new Date(dateObj);
+        const options = { weekday: "long" };
+        const dayOfWeek = date.toLocaleDateString("en-US", options);
+        return dayOfWeek;
+      }
+
+      const day = getDay("2023-06-20");
+      console.log(day);
+
+      const currentDay = getDay(new Date());
+      console.log(currentDay);
+
+      // Assignment 03 Task 02
+      function squareRoot(numArray) {
+        let sumOfSquares = 0;
+        for (let i = 0; i < numArray.length; i++) {
+          sumOfSquares += Math.pow(numArray[i], 2);
+        }
+
+        const squareRoot = Math.sqrt(sumOfSquares);
+        return squareRoot;
+      }
+
+      const array = squareRoot([3, 4, 5, 6]);
+      console.log(array);
+
+      // Assignment 03 Task 03
+      function primeNumber(num) {
+        if (num % 2 == 1 && num % num == 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      const demo = primeNumber(11);
+      console.log(demo);
+
+      // Assignment 03 Task 04
+      function newWindow(url, width, height) {
+        const windowFeatures = `width=${width},height=${height},left=0,top=0`;
+        window.open(url, "_blank", windowFeatures);
+      }
+
+      const url = "https://www.example.com";
+      const width = 800;
+      const height = 600;
+      newWindow(url, width, height);
+
+      // Assignment 03 Task 05
+      function browserInfo() {
+        let browser = navigator.userAgent;
+        return browser;
+      }
+
+      const res = browserInfo();
+      console.log(res);
+
+      // Assignment 03 Task 06
+      function getLocation() {
+        return new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
+              const location = latitude + "," + longitude;
+              resolve(location);
+            },
+            function (error) {
+              reject(error);
+            }
+          );
+        });
+      }
+
+      getLocation()
+        .then((location) => {
+          console.log(location);
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+
+      // Assignment 03 Task 07 (a)
+      function handleClick(event) {
+        const x = event.clientX;
+        const y = event.clientY;
+        alert(`Clicked at coordinates: (${x}, ${y})`);
+      }
+
+      // Assignment 03 Task 07 (b)
+      function handleKeyPress(event) {
+        const keyCode = event.keyCode || event.which;
+        alert(`Pressed key code: ${keyCode}`);
+      }
+      // Assignment 03 Task 07 (c)
+      function handleMouseOver(event) {
+        const image = event.target;
+        image.src =
+          "https://media.istockphoto.com/id/1372926793/photo/pink-podium-with-flowers-flying-in-the-air-womens-day-mothers-day-wedding-anniversary-podium.jpg?s=1024x1024&w=is&k=20&c=KBy6MMbuL9gMkktN4BlMDZNOmTw9a12YL-IU66VgaSg=";
+      }
+
+      const imageElement = document.getElementById("newImg");
+
+      imageElement.addEventListener("mouseover", handleMouseOver);
+
+      // Assignment 03 Task 08
+      function handleTextChange() {
+        const text = document.getElementById("text");
+        text.textContent = "I love you";
+      }
+      document
+        .getElementById("changeBtn")
+        .addEventListener("click", handleTextChange);
+
+      // Assignment 03 Task 09
+      function validateForm() {
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput =
+          document.getElementById("confirm-password");
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        const lettersPattern = /^[A-Za-z]+$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+        if (name === "") {
+          displayErrorMessage(nameInput, "Name is required.");
+          return false;
+        } else if (!lettersPattern.test(name)) {
+          displayErrorMessage(nameInput, "Name should contain only letters.");
+          return false;
+        } else {
+          clearErrorMessage(nameInput);
+        }
+
+        if (email === "") {
+          displayErrorMessage(emailInput, "Email is required.");
+          return false;
+        } else if (!emailPattern.test(email)) {
+          displayErrorMessage(
+            emailInput,
+            "Please enter a valid email address."
+          );
+          return false;
+        } else {
+          clearErrorMessage(emailInput);
+        }
+
+        // Validate password
+        if (password === "") {
+          displayErrorMessage(passwordInput, "Password is required.");
+          return false;
+        } else if (!passwordPattern.test(password)) {
+          displayErrorMessage(
+            passwordInput,
+            "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit."
+          );
+          return false;
+        } else {
+          clearErrorMessage(passwordInput);
+        }
+
+        // Validate confirm password
+        if (confirmPassword === "") {
+          displayErrorMessage(
+            confirmPasswordInput,
+            "Confirm Password is required."
+          );
+          return false;
+        } else if (confirmPassword !== password) {
+          displayErrorMessage(confirmPasswordInput, "Passwords do not match.");
+          return false;
+        } else {
+          clearErrorMessage(confirmPasswordInput);
+        }
+
+        // All fields are valid
+        return true;
+      }
+
+      function displayErrorMessage(inputElement, message) {
+        const errorElement = inputElement.nextElementSibling;
+        errorElement.textContent = message;
+        errorElement.style.display = "block";
+      }
+
+      function clearErrorMessage(inputElement) {
+        const errorElement = inputElement.nextElementSibling;
+        errorElement.textContent = "";
+        errorElement.style.display = "none";
+      }
+
+      const form = document.getElementById("my-form");
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission
+        if (validateForm()) {
+          // Form validation succeeded, do something (e.g., submit the form)
+          form.submit();
+        }
+      });
+
+      // Assignment 03 Task 10
+      function highlightParagraph() {
+        const paragraph = document.getElementById("bgtext");
+        paragraph.classList.add("highlight");
+      }
+
+      const button = document.getElementById("changeColor");
+
+      button.addEventListener("click", highlightParagraph);
+
+      // Assignment 03 Task 11
+      function createListItems() {
+        var myList = document.getElementById("myList");
+
+        for (var i = 1; i <= 5; i++) {
+          var listItem = document.createElement("li");
+          listItem.textContent = i;
+          myList.appendChild(listItem);
+        }
+      }
+
+      // Call the function to create the list items
+      createListItems();
+
+      // Assignment 03 Task 12
+      function changeImage() {
+        const img = document.getElementById("imgId");
+
+        img.src =
+          "https://cdn.pixabay.com/photo/2013/07/13/10/08/flower-156608_640.png";
+      }
+
+      // Assignment 03 Task 14
+      function getData() {
+        const URL= "https://api.example.com/data";
+        const configuration = { method: "GET" };
+        fetch(URL, configuration)
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.error(error));
+      }
+
+      // Assignment 03 Task 15
+
+      function postData() {
+        const URL = "https://api.example.com/submit";
+        const info = {
+          name: "John Doe",
+          email: "johndoe@example.com",
+        };
+        const configuration = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(info),
+        };
+
+        fetch(URL, configuration)
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.error(error));
+      }
+
+
+      
+
+    </script>
+  </body>
+</html>
